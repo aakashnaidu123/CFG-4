@@ -46,3 +46,15 @@ exports.login = async (req, res) => {
     res.status(500).json({ error: 'Login failed', details: err.message });
   }
 };
+
+exports.getNgoPartners = async (req, res) => {
+  try {
+    const ngos = await User.findAll({
+      where: { role: 'ngo_partner' },
+      attributes: ['id', 'name', 'email', 'ngo_name'],
+    });
+    res.json(ngos);
+  } catch (err) {
+    res.status(500).json({ error: 'Failed to fetch NGO partners', details: err.message });
+  }
+};
