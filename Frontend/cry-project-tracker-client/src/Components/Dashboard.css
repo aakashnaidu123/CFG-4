@@ -1,0 +1,203 @@
+/* Premium Dashboard Styles */
+
+.premium-dashboard-container {
+  min-height: 50vh;
+  padding: 0;
+  margin: 0;
+  font-family: 'Segoe UI', 'Roboto', Arial, sans-serif;
+  background: linear-gradient(135deg, #f9d423 0%, #ff4e50 100%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.hero-section {
+  width: 100%;
+  padding: 40px 0 20px 0;
+  text-align: center;
+  background: rgba(255,255,255,0.85);
+  box-shadow: 0 4px 24px rgba(0,0,0,0.07);
+  border-radius: 0 0 32px 32px;
+}
+
+.cry-logo {
+  width: 120px;
+  margin-bottom: 16px;
+}
+
+.main-title {
+  font-size: 2.8rem;
+  color: #222;
+  margin-bottom: 0.5rem;
+  font-weight: 700;
+}
+
+.subtitle {
+  font-size: 1.3rem;
+  color: #444;
+  margin-bottom: 0;
+}
+
+.dashboard-mission {
+  margin: 32px 0 16px 0;
+  display: flex;
+  justify-content: center;
+  width: 100%;
+}
+
+.mission-card {
+  background: #fffbe7;
+  border-radius: 18px;
+  box-shadow: 0 2px 12px rgba(0,0,0,0.08);
+  padding: 28px 36px;
+  max-width: 500px;
+  text-align: center;
+}
+
+.mission-card h3 {
+  color: #ff4e50;
+  margin-bottom: 10px;
+  font-size: 1.5rem;
+}
+
+.mission-card p {
+  color: #333;
+  font-size: 1.1rem;
+}
+
+.premium-features {
+  margin-top: 32px;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.dashboard-widget {
+  background: #fff;
+  border-radius: 16px;
+  box-shadow: 0 2px 12px rgba(0,0,0,0.08);
+  padding: 24px 32px;
+  margin-bottom: 32px;
+  max-width: 420px;
+  text-align: center;
+}
+
+.dashboard-widget h3 {
+  color: #f9d423;
+  margin-bottom: 8px;
+  font-size: 1.3rem;
+}
+
+.dashboard-widget p {
+  color: #444;
+  font-size: 1rem;
+}
+
+.dashboard-stats {
+  display: flex;
+  gap: 32px;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+.stat-card {
+  background: #fffbe7;
+  border-radius: 14px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+  padding: 24px 32px;
+  min-width: 140px;
+  text-align: center;
+  margin-bottom: 16px;
+}
+
+.stat-number {
+  font-size: 2.1rem;
+  color: #ff4e50;
+  font-weight: 700;
+}
+
+.stat-label {
+  display: block;
+  color: #444;
+  font-size: 1rem;
+  margin-top: 6px;
+}
+
+.cta-btn {
+  margin-top: 24px;
+  padding: 14px 38px;
+  background: linear-gradient(90deg, #ff4e50 0%, #f9d423 100%);
+  color: #fff;
+  font-size: 1.1rem;
+  font-weight: 600;
+  border: none;
+  border-radius: 30px;
+  box-shadow: 0 4px 16px rgba(249, 212, 35, 0.15);
+  cursor: pointer;
+  transition: background 0.3s, transform 0.2s, box-shadow 0.3s;
+}
+
+.cta-btn:hover {
+  background: linear-gradient(90deg, #f9d423 0%, #ff4e50 100%);
+  transform: translateY(-2px) scale(1.04);
+  box-shadow: 0 8px 32px rgba(255, 78, 80, 0.18);
+}
+
+/* Glassmorphism effect for cards */
+.mission-card, .dashboard-widget, .stat-card {
+  background: rgba(255, 255, 255, 0.85);
+  backdrop-filter: blur(6px);
+  border: 1.5px solid rgba(255, 255, 255, 0.35);
+  box-shadow: 0 8px 32px rgba(0,0,0,0.10);
+  transition: box-shadow 0.3s, transform 0.2s;
+}
+
+.mission-card:hover, .dashboard-widget:hover, .stat-card:hover {
+  box-shadow: 0 12px 40px rgba(255, 78, 80, 0.13);
+  transform: translateY(-3px) scale(1.03);
+}
+
+/* Modern mission section */
+.modern-mission {
+  margin-top: 36px;
+  margin-bottom: 24px;
+}
+
+/* Modern card and stat styles */
+.modern-cards {
+  gap: 32px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.modern-widget {
+  border-left: 6px solid #ff4e50;
+  border-right: 6px solid #f9d423;
+}
+
+.modern-stats {
+  margin-top: 18px;
+}
+
+.modern-stat-card {
+  border-top: 4px solid #ff4e50;
+  border-bottom: 4px solid #f9d423;
+  background: rgba(255, 251, 231, 0.95);
+}
+
+@media (max-width: 700px) {
+  .dashboard-stats {
+    flex-direction: column;
+    gap: 16px;
+    align-items: center;
+  }
+  .mission-card, .dashboard-widget {
+    padding: 18px 10px;
+    max-width: 95vw;
+  }
+  .modern-cards {
+    gap: 18px;
+  }
+}
