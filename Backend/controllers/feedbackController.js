@@ -1,10 +1,10 @@
 const { Feedback, User } = require('../models');
 
-// Create feedback for a project
+
 exports.createFeedback = async (req, res) => {
   try {
     const { project_id, comment } = req.body;
-    const user_id = req.user.id; // From auth middleware
+    const user_id = req.user.id; 
 
     if (!comment) {
         return res.status(400).json({ error: 'Feedback comment cannot be empty.' });
@@ -22,7 +22,7 @@ exports.createFeedback = async (req, res) => {
   }
 };
 
-// Get all feedback for a specific project
+
 exports.getFeedbackForProject = async (req, res) => {
   try {
     const { projectId } = req.params;
@@ -30,7 +30,7 @@ exports.getFeedbackForProject = async (req, res) => {
       where: { project_id: projectId },
       include: [{
         model: User,
-        attributes: ['name', 'role'], // Include user's name and role
+        attributes: ['name', 'role'], 
       }],
       order: [['createdAt', 'DESC']],
     });

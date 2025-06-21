@@ -24,7 +24,7 @@ const User = sequelize.define('User', {
   },
   ngo_name: {
     type: DataTypes.STRING,
-    allowNull: true, // Only applicable for users with the 'ngo_partner' role
+    allowNull: true, 
   },
 }, {
   // Model options

@@ -3,15 +3,15 @@ const { Task, User, Project } = require('../models');
 const { Op } = require('sequelize');
 const sendMail = require('../utils/sendMail');
 
-// Run daily at 9 AM
+
 cron.schedule('0 9 * * *', async () => {
   console.log('🔔 Checking for tasks due in exactly 7 days...');
 
-  // Calculate the target date 7 days from now
+  
   const targetDate = new Date();
   targetDate.setDate(targetDate.getDate() + 7);
   
-  // Set time to start and end of the target day to ensure we catch all tasks on that day
+  
   const startOfDay = new Date(targetDate.setHours(0, 0, 0, 0));
   const endOfDay = new Date(targetDate.setHours(23, 59, 59, 999));
 
@@ -26,7 +26,7 @@ cron.schedule('0 9 * * *', async () => {
       include: [
         {
           model: Project,
-          required: true, // Ensures we only get tasks associated with a project
+          required: true, 
           include: [
             { model: User, as: 'Frontliner', attributes: ['email'] },
             { model: User, as: 'NgoPartner', attributes: ['email'] }
@@ -45,13 +45,13 @@ cron.schedule('0 9 * * *', async () => {
       const message = `Reminder: The task "${task.name}" for project "${project.name}" is due on ${task.due_date}.`;
       const subject = `Task Reminder: ${task.name}`;
 
-      // Send email to the CRY frontliner
+      
       if (cryFrontlinerEmail) {
         await sendMail(cryFrontlinerEmail, subject, message);
         console.log(`Sent reminder to Frontliner at ${cryFrontlinerEmail} for task "${task.name}"`);
       }
 
-      // Send email to the NGO partner
+      
       if (ngoPartnerEmail) {
         await sendMail(ngoPartnerEmail, subject, message);
         console.log(`Sent reminder to NGO Partner at ${ngoPartnerEmail} for task "${task.name}"`);

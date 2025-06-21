@@ -15,7 +15,6 @@ const Task = sequelize.define('Task', {
     defaultValue: 'Pending',
     allowNull: false,
   },
-  // project_id will be added via association in models/index.js
 }, {
   // Model options
 });

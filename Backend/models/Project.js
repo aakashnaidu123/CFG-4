@@ -10,8 +10,6 @@ const Project = sequelize.define('Project', {
     type: DataTypes.ENUM('January', 'July'),
     allowNull: false,
   },
-  // We will associate frontliner_id and ngo_partner_id
-  // via the models/index.js file.
 }, {
   // Model options
 });

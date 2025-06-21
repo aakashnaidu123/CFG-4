@@ -55,11 +55,11 @@ exports.getTasksByProject = async (req, res) => {
   }
 };
 
-// Update a task's status
+
 exports.updateTaskStatus = async (req, res) => {
   try {
     const { taskId } = req.params;
-    const { status } = req.body; // Expecting a body like { "status": "Completed" }
+    const { status } = req.body; 
 
     if (!['Pending', 'Completed', 'Overdue'].includes(status)) {
         return res.status(400).json({ error: 'Invalid status provided.' });
@@ -70,9 +70,6 @@ exports.updateTaskStatus = async (req, res) => {
       return res.status(404).json({ error: 'Task not found' });
     }
     
-    // Optional: Check if the user has permission to update this task
-    // (e.g., is the frontliner or NGO partner for the associated project)
-    // This would require a more complex query. For now, we allow any authenticated user.
 
     task.status = status;
     await task.save();

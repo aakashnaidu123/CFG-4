@@ -6,7 +6,6 @@ const Feedback = sequelize.define('Feedback', {
     type: DataTypes.TEXT,
     allowNull: false,
   },
-  // project_id and user_id will be added via associations
 });
 
 module.exports = Feedback;

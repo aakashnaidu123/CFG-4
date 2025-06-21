@@ -6,7 +6,7 @@ const { authenticateToken } = require('../middleware/auth');
 
 const storage = multer.diskStorage({
   destination: (req, file, cb) => {
-    cb(null, 'uploads/'); // Ensure the 'uploads' directory exists
+    cb(null, 'uploads/'); 
   },
   filename: (req, file, cb) => {
     cb(null, `${Date.now()}-${file.originalname}`);
@@ -15,10 +15,8 @@ const storage = multer.diskStorage({
 
 const upload = multer({ storage });
 
-// Upload a document for a project
 router.post('/', authenticateToken, upload.single('document'), documentController.uploadDocument);
 
-// Get all documents for a specific project
 router.get('/project/:projectId', authenticateToken, documentController.getProjectDocuments);
 
 module.exports = router;

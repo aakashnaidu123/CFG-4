@@ -10,8 +10,7 @@ const Document = sequelize.define('Document', {
     type: DataTypes.STRING,
     allowNull: false,
   },
-  // project_id and uploader_id will be added
-  // via associations in models/index.js
+  
 }, {
   // Model options
 });

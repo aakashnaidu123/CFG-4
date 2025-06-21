@@ -1,10 +1,10 @@
 const { Project, Task, User } = require('../models');
 
-// Helper function to generate all tasks for a project's cycle
+
 const getTasksForCycle = (cycle, year) => {
   const allTasks = [];
 
-  // 1. Define Annual Evaluation Review (AER) and Statutory tasks
+  
   const janCycleStaticTasks = [
     { name: 'Annual review visit', due_date: `${year}-11-15` },
     { name: 'AER Submission', due_date: `${year}-12-10` },
@@ -27,7 +27,7 @@ const getTasksForCycle = (cycle, year) => {
 
   allTasks.push(...(cycle === 'January' ? janCycleStaticTasks : julyCycleStaticTasks));
 
-  // 2. Define Quarters and generate quarterly DRS tasks
+  
   const quarters = cycle === 'January'
     ? [
         { quarter: 1, endMonth: 3, year: year }, // Mar

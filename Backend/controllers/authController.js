@@ -8,7 +8,6 @@ exports.register = async (req, res) => {
   try {
     const { name, email, password, role, ngo_name } = req.body;
 
-    // --- Input Validation ---
     if (!name || !email || !password || !role) {
       return res.status(400).json({ error: 'Name, email, password, and role are required.' });
     }
@@ -18,15 +17,13 @@ exports.register = async (req, res) => {
     if (!['cry_frontliner', 'ngo_partner', 'admin'].includes(role)) {
         return res.status(400).json({ error: 'Invalid role provided.' });
     }
-    // --- End Validation ---
 
     const hashedPassword = await bcrypt.hash(password, 10);
     const user = await User.create({ name, email, password: hashedPassword, role, ngo_name });
     
-    // Do not send back the user object, especially the password hash
     res.status(201).json({ message: 'User registered successfully' });
   } catch (err) {
-    // Check for Sequelize unique constraint error
+    
     if (err.name === 'SequelizeUniqueConstraintError') {
       return res.status(409).json({ error: 'Registration failed. Email already in use.' });
     }
