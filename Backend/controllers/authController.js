@@ -40,9 +40,22 @@
       const isMatch = await bcrypt.compare(password, user.password);
       if (!isMatch) return res.status(401).json({ error: 'Invalid credentials' });
 
-      const token = jwt.sign({ id: user.id, role: user.role }, SECRET, { expiresIn: '1d' });
-      res.json({ message: 'Login successful', token, user: { id: user.id, name: user.name, role: user.role } });
-    } catch (err) {
-      res.status(500).json({ error: 'Login failed', details: err.message });
-    }
-  };
+      
+    const token = jwt.sign({ id: user.id, role: user.role }, SECRET, { expiresIn: '1d' });
+    res.json({ message: 'Login successful', token, user: { id: user.id, name: user.name, role: user.role } });
+  } catch (err) {
+    res.status(500).json({ error: 'Login failed', details: err.message });
+  }
+};
+
+exports.getNgoPartners = async (req, res) => {
+  try {
+    const ngos = await User.findAll({
+      where: { role: 'ngo_partner' },
+      attributes: ['id', 'name', 'email', 'ngo_name'],
+    });
+    res.json(ngos);
+  } catch (err) {
+    res.status(500).json({ error: 'Failed to fetch NGO partners', details: err.message });
+  }
+};
