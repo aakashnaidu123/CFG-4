@@ -1,15 +1,19 @@
-module.exports = (sequelize, DataTypes) => {
-  const Document = sequelize.define('Document', {
-    id: { type: DataTypes.INTEGER, autoIncrement: true, primaryKey: true },
-    name: { type: DataTypes.STRING, allowNull: false },
-    fileUrl: { type: DataTypes.STRING, allowNull: false },
-    uploadedAt: { type: DataTypes.DATE, defaultValue: DataTypes.NOW },
-  });
+const { DataTypes } = require('sequelize');
+const sequelize = require('../config/db');
 
-  Document.associate = (models) => {
-    Document.belongsTo(models.User, { foreignKey: 'uploadedByUserId' });
-    Document.belongsTo(models.Task, { foreignKey: 'taskId' });
-  };
+const Document = sequelize.define('Document', {
+  name: {
+    type: DataTypes.STRING,
+    allowNull: false,
+  },
+  file_path: {
+    type: DataTypes.STRING,
+    allowNull: false,
+  },
+  // project_id and uploader_id will be added
+  // via associations in models/index.js
+}, {
+  // Model options
+});
 
-  return Document;
-};
+module.exports = Document;

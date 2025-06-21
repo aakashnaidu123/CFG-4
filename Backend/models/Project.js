@@ -1,16 +1,19 @@
-module.exports = (sequelize, DataTypes) => {
-  const Project = sequelize.define('Project', {
-    id: { type: DataTypes.INTEGER, autoIncrement: true, primaryKey: true },
-    name: { type: DataTypes.STRING, allowNull: false },
-    cycle: { type: DataTypes.ENUM('Jan', 'July'), allowNull: false },
-    startDate: { type: DataTypes.DATEONLY, allowNull: false },
-    endDate: { type: DataTypes.DATEONLY, allowNull: false },
-  });
+const { DataTypes } = require('sequelize');
+const sequelize = require('../config/db');
 
-  Project.associate = (models) => {
-    Project.belongsTo(models.User, { foreignKey: 'ngoId' });
-    Project.hasMany(models.Task, { foreignKey: 'projectId' });
-  };
+const Project = sequelize.define('Project', {
+  name: {
+    type: DataTypes.STRING,
+    allowNull: false,
+  },
+  cycle: {
+    type: DataTypes.ENUM('January', 'July'),
+    allowNull: false,
+  },
+  // We will associate frontliner_id and ngo_partner_id
+  // via the models/index.js file.
+}, {
+  // Model options
+});
 
-  return Project;
-};
+module.exports = Project;

@@ -1,13 +1,19 @@
 const app = require('./app');
-const connectDB = require('./config/db');
+const db = require('./models');
 
-// 👇 Import cron job
-require('./cron/reminderCron');
+// 👇 Import and start cron job
+require('./cron/remainderCron.js'); // Corrected filename
 
 const PORT = process.env.PORT || 5000;
 
-connectDB().then(() => {
-  app.listen(PORT, () =>
-    console.log(`🚀 Server running at http://localhost:${PORT}`)
-  );
-});
+// Sync database and start server
+db.sequelize.sync({ force: false }) // Use { force: true } only in dev to drop/recreate tables
+  .then(() => {
+    console.log('Database synced successfully.');
+    app.listen(PORT, () => {
+      console.log(`🚀 Server running at http://localhost:${PORT}`);
+    });
+  })
+  .catch((err) => {
+    console.error('❌ Failed to sync database:', err);
+  });

@@ -1,19 +1,40 @@
-module.exports = (sequelize, DataTypes) => {
-  const User = sequelize.define('User', {
-    id: { type: DataTypes.INTEGER, autoIncrement: true, primaryKey: true },
-    name: { type: DataTypes.STRING, allowNull: false },
-    email: { type: DataTypes.STRING, allowNull: false, unique: true },
-    password: { type: DataTypes.STRING, allowNull: false },
-    role: { type: DataTypes.ENUM('CRY', 'NGO'), allowNull: false },
-    assignedNgoId: { type: DataTypes.INTEGER, allowNull: true },
-  });
+const { DataTypes } = require('sequelize');
+const sequelize = require('../config/db');
 
-  User.associate = (models) => {
-    User.hasMany(models.Project, { foreignKey: 'ngoId' });
-    User.hasMany(models.Task, { foreignKey: 'assignedToUserId' });
-    User.hasMany(models.Document, { foreignKey: 'uploadedByUserId' });
-    User.hasMany(models.Feedback, { foreignKey: 'givenBy', as: 'givenFeedback' });
-  };
+const User = sequelize.define('User', {
+  name: {
+    type: DataTypes.STRING,
+    allowNull: false,
+  },
+  email: {
+    type: DataTypes.STRING,
+    allowNull: false,
+    unique: true,
+    validate: {
+      isEmail: true,
+    },
+  },
+  password: {
+    type: DataTypes.STRING,
+    allowNull: false,
+  },
+  role: {
+    type: DataTypes.ENUM('cry_frontliner', 'ngo_partner', 'admin'),
+    allowNull: false,
+  },
+  ngo_name: {
+    type: DataTypes.STRING,
+    allowNull: true, // Only applicable for users with the 'ngo_partner' role
+  },
+}, {
+  // Model options
+});
 
-  return User;
+User.associate = (models) => {
+  User.hasMany(models.Project, { foreignKey: 'ngoId' });
+  User.hasMany(models.Task, { foreignKey: 'assignedToUserId' });
+  User.hasMany(models.Document, { foreignKey: 'uploadedByUserId' });
+  User.hasMany(models.Feedback, { foreignKey: 'givenBy', as: 'givenFeedback' });
 };
+
+module.exports = User;
