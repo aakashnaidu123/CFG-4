@@ -1,13 +1,13 @@
 const { Sequelize } = require('sequelize');
-const config = require('./config.js'); // Import from your config.js file
+require('dotenv').config(); // Loads variables from the .env file
 
-// Create a new Sequelize instance using the credentials from config.js
+// Create a new Sequelize instance using environment variables
 const sequelize = new Sequelize(
-  config.database,
-  config.username,
-  config.password,
+  process.env.DB_NAME,
+  process.env.DB_USER,
+  process.env.DB_PASSWORD,
   {
-    host: config.host,
+    host: process.env.DB_HOST,
     dialect: 'mysql',
     logging: false // Set to console.log to see SQL queries
   }
